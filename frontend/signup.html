@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USER AUTHENTICATION</title>
+
+    <style>
+        body{
+            margin: 0px;
+            height: 97vh;
+
+            display: grid;
+            place-items: center;
+        }
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>SIGN UP</p>
+        <form>
+            <input type="text" placeholder="username" required autocomplete="off" id="name"><br><br>
+            <input type="email" placeholder="email" required autocomplete="off" id="email"><br><br>
+            <input type="password" placeholder="password" required id="password"><br><br>
+
+            <input type="submit" value="create your account">
+        </form>
+    </div>
+
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    
+    <script>
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            addUser(name,email,password);
+        });
+
+        async function addUser(name, email, password) {
+            try {
+                const response = await axios.post("http://localhost:4000/api/signup", {
+                    username: name,
+                    email: email,
+                    password: password
+                });
+                console.log("User created successfully:", response.data);
+            } catch (error) {
+                console.error("ERROR:", error);
+            }
+        }
+    </script>
+</body>
+</html>
