@@ -34,7 +34,6 @@
         <p id="otherP">Don't have an account? <a href="signup.html">Signup here</a></p>
     </div>
     
-
     <script src="./node_modules/axios/dist/axios.min.js"></script>
 
     <script>
@@ -55,8 +54,12 @@
                     emailORusername: email,
                     password: password
                 });
-                console.log("User logged in successfully:", response.data);
-                return response.data; // Return response data if login is successful
+                if (response.status >= 200 && response.status < 300) { // Optional: You can check for a specific status code like 200 or 201.
+                    window.location.href = '/frontend/main.html'; // Redirect after successful signup
+                } else {
+                    console.error("Signup failed:", response.data); // Handle unsuccessful signup
+                    window.alert("INVALID USERNAME OR EMAIL");
+                }
             } catch (error) {
                 console.error('Error:', error.response ? error.response.data : error.message);
                 return false; // Return false if there's an error

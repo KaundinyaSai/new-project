@@ -20,7 +20,7 @@
         div{
             display: grid;
             place-items: center;
-        }
+        }  
     </style>
 </head>
 <body>
@@ -34,7 +34,7 @@
             <input type="submit" value="create your account">
         </form>
 
-        <p>Already have an account? <a href="login.html">login here</a></p>
+        <p>Already have an account? <a href="login.html">login here</a></p> 
     </div>
 
     <script src="./node_modules/axios/dist/axios.min.js"></script>
@@ -59,7 +59,11 @@
                     email: email,
                     password: password
                 });
-                console.log("User created successfully:", response.data);
+                if (response.status >= 200 && response.status < 300) { // Optional: You can check for a specific status code like 200 or 201.
+                    window.location.href = '/frontend/main.html'; // Redirect after successful signup
+                } else {
+                    console.error("Signup failed:", response.data); // Handle unsuccessful signup
+                }
             } catch (error) {
                 console.error("ERROR:", error);
             }
