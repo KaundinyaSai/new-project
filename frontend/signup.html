@@ -60,7 +60,7 @@
                     password: password
                 });
                 if (response.status >= 200 && response.status < 300) { // Optional: You can check for a specific status code like 200 or 201.
-                    window.location.href = '/frontend/main.html'; // Redirect after successful signup
+                    window.location.href = '/frontend/main/main.html'; // Redirect after successful signup
                 } else {
                     console.error("Signup failed:", response.data); // Handle unsuccessful signup
                 }

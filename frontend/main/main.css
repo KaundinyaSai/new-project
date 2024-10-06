@@ -1,0 +1,97 @@
+body {
+  display: grid;
+  height: 100vh;
+
+  margin: 0px;
+}
+h1 {
+  text-align: center;
+  align-self: center;
+}
+
+#settingsButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 24px;
+  font-family: "Material Symbols Outlined";
+
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center;
+}
+
+#settingsButton:hover {
+  background-color: #3040a9;
+}
+
+#settings {
+  background-color: rgb(149, 149, 149);
+  width: 250px;
+  height: inherit;
+  position: fixed;
+  right: -250px; /* Hidden off-screen */
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  transition: right 0.3s ease; /* Smooth transition */
+}
+
+#settings #revertButton {
+  background-color: inherit;
+  border: 0px;
+
+  position: fixed;
+  right: 20px;
+  top: 10px;
+
+  width: 30px;
+  height: 30px;
+
+  display: none;
+  justify-content: center; /* Horizontally center */
+  align-items: center;
+}
+
+#settings #revertButton:hover {
+  cursor: pointer;
+  background-color: gray;
+}
+
+#settings #deleteAccountButton {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  width: inherit;
+  text-align: left;
+  position: fixed;
+  top: 92vh;
+
+  font-size: large;
+}
+
+#settings #deleteAccountButton:hover {
+  cursor: pointer;
+  background-color: gray;
+  color: red;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #settings {
+    width: 200px;
+  }
+}

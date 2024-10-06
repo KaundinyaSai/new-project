@@ -101,6 +101,27 @@ app.post("/api/users/login", (req, res) => {
   );
 });
 
+app.delete("/api/users/id:id", (req, res) => {
+  const { id } = req.params;
+  const query = "DELETE FROM users WHERE id= ?";
+
+  if (!Number.isInteger(Number(id))) {
+    return res.status(400).json({ error: "Invalid user ID" });
+  }
+
+  database.query(query, [id], (err, result) => {
+    if (err) {
+      console.error("Database Error:", err);
+      res.status(500).json({ error: "Could not delete user" });
+      return;
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ Error: "User not found" });
+    }
+    res.json({ Message: "User deleted successfully" });
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Sever is running at http://localhost:${PORT}`);
