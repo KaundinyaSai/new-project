@@ -28,7 +28,7 @@ function getSalt(length) {
     return crypto.randomBytes(length).toString("hex");
 }
 
-app.post('/api/signup', async (req, res) => {
+app.post('/api/users/signup', async (req, res) => {
     const { username, email, password } = req.body;
     const query = "INSERT INTO users(username, email, password) VALUES(?, ?, ?)";
 
@@ -57,6 +57,39 @@ app.post('/api/signup', async (req, res) => {
         res.status(500).json({ Error: "An error occurred during signup" });
     }
 });
+
+app.post('/api/users/login', (req, res) => {
+    const {emailORusername, password} = req.body;
+    const query = "SELECT * FROM users WHERE email= ? OR username = ?";
+
+    database.query(query, [emailORusername, emailORusername], async (err, result) => {
+        if(err){
+            console.error("Database Error:", err);
+            res.status(500).json({ Error: "Could not find user" });
+            return;
+        }
+        
+        if(result.length === 0){
+            return res.status(401).json({ Error: "Invalid username or email or password" });
+        }
+
+        const user = result[0];
+        try {
+            
+            const validPass = await argon2.verify(user.password, password);
+
+            if (!validPass) {
+                return res.status(401).json({ Error: "Invalid username or email or password" });
+            }
+
+            return res.status(200).json({ Message: "Login successful" });
+
+        } catch (error) {
+            console.error("Password verification error:", error);
+            return res.status(500).json({ Error: "Internal server error during password verification" });
+        }
+    });
+}); 
 
 
 const PORT = process.env.PORT || 3000;
