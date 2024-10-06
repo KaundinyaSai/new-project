@@ -1,5 +1,5 @@
-import express from "express";
 import "dotenv/config";
+import express from "express";
 import mysql2 from "mysql2";
 import cors from "cors";
 import argon2 from "argon2";
@@ -93,11 +93,9 @@ app.post("/api/users/login", (req, res) => {
         return res.status(200).json({ Message: "Login successful" });
       } catch (error) {
         console.error("Password verification error:", error);
-        return res
-          .status(500)
-          .json({
-            Error: "Internal server error during password verification",
-          });
+        return res.status(500).json({
+          Error: "Internal server error during password verification",
+        });
       }
     }
   );
