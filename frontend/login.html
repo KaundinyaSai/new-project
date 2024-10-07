@@ -56,18 +56,21 @@
                     emailORusername: email,
                     password: password
                 });
-                if (response.status >= 200 && response.status < 300) { // Optional: You can check for a specific status code like 200 or 201.
-                    window.location.href = '/frontend/main/main.html'; // Redirect after successful signup
+
+                if (response.status >= 200 && response.status <= 299) {
+                    window.location.href = '/frontend/main/main.html';
+                    
+                    const token = response.data.token;
+                    localStorage.setItem("JWT", token);
                 } else {
-                    console.error("Signup failed:", response.data); // Handle unsuccessful signup
+                    console.error("Login failed:", response.data);
                     window.alert("INVALID USERNAME OR EMAIL");
                 }
             } catch (error) {
                 console.error('Error:', error.response ? error.response.data : error.message);
-                return false; // Return false if there's an error
+                window.alert("An error occurred during login.");
             }
         }
-
     </script>
 </body>
 </html>
