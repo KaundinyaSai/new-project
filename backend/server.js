@@ -5,7 +5,6 @@ import cors from "cors";
 import argon2 from "argon2";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
 
 const app = express();
 const database = mysql2.createConnection({
@@ -33,23 +32,6 @@ app.use(cookieParser());
 
 function getSalt(length) {
   return crypto.randomBytes(length).toString("hex");
-}
-
-// JWT verification middleware
-function authenticateToken(req, res, next) {
-  const token = req.cookies.token; // Access the token from cookies
-
-  if (!token) {
-    return res.sendStatus(401); // Unauthorized if no token is provided
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) {
-      return res.sendStatus(403); // Forbidden if token is invalid
-    }
-    req.user = user; // Attach user information to request object
-    next(); // Proceed to the next middleware or route handler
-  });
 }
 
 app.post("/api/users/signup", async (req, res) => {
@@ -118,17 +100,9 @@ app.post("/api/users/login", (req, res) => {
             expiresIn: "3d",
           });
 
-          // Set cookie
-          res.cookie("token", token, {
-            expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
-            httpOnly: true,
-            sameSite: "none",
-            path: "/",
-          });
           res.status(201).json({
             message: "User logged in successfully",
             token,
-            cookieSet: req.cookies.token !== undefined ? true : false,
           });
         }
       } catch (error) {
