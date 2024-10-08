@@ -66,6 +66,23 @@ h1 {
   background-color: gray;
 }
 
+#settings #logoutButton {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  width: inherit;
+  text-align: left;
+  position: fixed;
+  top: 88vh;
+
+  font-size: large;
+}
+
+#settings #logoutButton:hover {
+  cursor: pointer;
+  background-color: gray;
+}
+
 #settings #deleteAccountButton {
   background-color: inherit;
   border: none;

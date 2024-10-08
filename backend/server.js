@@ -28,8 +28,8 @@ app.use(
     credentials: true,
   })
 );
-app.use(cookieParser());
 
+// Generate random salt value
 function getSalt(length) {
   return crypto.randomBytes(length).toString("hex");
 }
@@ -39,7 +39,6 @@ app.post("/api/users/signup", async (req, res) => {
   const query = "INSERT INTO users(username, email, password) VALUES(?, ?, ?)";
 
   try {
-    // Generate a new salt for each signup attempt
     const salt = getSalt(16);
     const hashedPass = await argon2.hash(password, {
       salt: Buffer.from(salt, "hex"),
@@ -95,7 +94,7 @@ app.post("/api/users/login", (req, res) => {
             .status(401)
             .json({ Error: "Invalid username or email or password" });
         } else {
-          // JWT token creation;
+          // JWT token creation
           const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
             expiresIn: "3d",
           });
