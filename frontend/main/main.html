@@ -13,7 +13,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
   <body>
-    <h1>MAIN SITE</h1>
+    <div id="main">
+      <form id="addTask">
+        <input type="text" id="taskInput" placeholder="Add a new task" required />
+        <button type="submit">Add Task</button>
+      </form>
+      <div id="tasks"></div>
+
+      <template id="taskTemplate">
+        <span class="task">
+          <input type="checkbox" name="status">
+          <p></p> 
+          <button id="deleteTask">x</button>
+        </span>
+      </template>
+    </div>
+    </div>
 
     <button id="settingsButton" aria-label="Open Settings">
       <span class="material-symbols-outlined">settings</span>
@@ -28,6 +43,7 @@
     </div>
 
     <script src="init.js"></script>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="buttons.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>

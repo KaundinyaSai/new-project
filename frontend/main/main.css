@@ -4,9 +4,31 @@ body {
 
   margin: 0px;
 }
-h1 {
-  text-align: center;
-  align-self: center;
+
+#main {
+  place-self: center;
+}
+#tasks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  padding: 2.5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.task input[type="checkbox"] {
+  margin-right: 10px;
+}
+.task #deleteTask {
+  margin-left: auto;
 }
 
 #settingsButton {
