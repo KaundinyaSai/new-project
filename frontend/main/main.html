@@ -15,19 +15,20 @@
   <body>
     <div id="main">
       <form id="addTask">
-        <input type="text" id="taskInput" placeholder="Add a new task" required />
+        <input type="text" id="taskInput" placeholder="Add a new task" maxlength="50" autocomplete="off" required />
         <button type="submit">Add Task</button>
       </form>
       <div id="tasks"></div>
 
       <template id="taskTemplate">
-        <span class="task">
-          <input type="checkbox" name="status">
-          <p></p> 
-          <button id="deleteTask">x</button>
-        </span>
+        <div class="task">
+          <input type="checkbox" name="status" class="checkbox">
+          <p class="taskText"></p> 
+          <button class="deleteTask">x</button>
+        </div>
       </template>
-    </div>
+      
+      </div>
     </div>
 
     <button id="settingsButton" aria-label="Open Settings">

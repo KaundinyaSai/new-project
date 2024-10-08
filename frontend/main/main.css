@@ -10,7 +10,7 @@ body {
 }
 #tasks {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
   gap: 10px;
   margin-top: 10px;
 }
@@ -18,16 +18,24 @@ body {
 .task {
   display: flex;
   align-items: center;
-  padding: 2.5px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.task input[type="checkbox"] {
-  margin-right: 10px;
+.task p {
+  flex-grow: 1;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-.task #deleteTask {
+
+.task .deleteTask {
   margin-left: auto;
 }
 
