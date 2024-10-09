@@ -63,4 +63,24 @@ router.get("/api/tasks/:user_id", (req, res) => {
   });
 });
 
+router.delete("/api/tasks/:id", (req, res) => {
+  const taskId = req.params.id;
+
+  const query = "DELETE FROM tasks WHERE id =?";
+  database.query(query, [taskId], (err, result) => {
+    if (err) {
+      console.error("ERROR:", err);
+      return res
+        .status(500)
+        .json({ error: "An error occurred during task deletion" });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Task not found" });
+    }
+
+    res.json({ message: "Task deleted succesfully" });
+  });
+});
+
 export default router;

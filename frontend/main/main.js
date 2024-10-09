@@ -14,7 +14,7 @@ addTaskForm.addEventListener("submit", (e) => {
 
   const deleteBtn = newTask.querySelector(".deleteTask");
   deleteBtn.addEventListener("click", () => {
-    tasksContainer.removeChild(deleteBtn.parentElement); // Remove the task from the tasks container
+    tasksContainer.removeChild(deleteBtn.parentElement);
   });
 
   const taskTextElement = newTask.querySelector(".taskText");
@@ -28,13 +28,11 @@ addTaskForm.addEventListener("submit", (e) => {
   });
 
   tasksContainer.appendChild(newTask);
-  taskInput.value = ""; // Clear the input field
+  taskInput.value = "";
 
-  // Get JWT token from localStorage
   const token = localStorage.getItem("JWT");
 
-  // Send task to the database
-  addTaskToDatabase(taskText, "incomplete", token); // Send only title, status, and token
+  addTaskToDatabase(taskText, "incomplete", token);
 });
 
 async function addTaskToDatabase(title, status, token) {
@@ -47,7 +45,7 @@ async function addTaskToDatabase(title, status, token) {
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`, // Send JWT in Authorization header
+          Authorization: `Bearer ${token}`,
         },
       }
     );

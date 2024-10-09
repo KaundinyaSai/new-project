@@ -35,12 +35,12 @@ async function loadTasks(user_id) {
 
     tasks.forEach((task) => {
       const newTask = taskTemplate.content.cloneNode(true);
-      const taskText = task.title; // Assuming 'text' is the property holding the task description
+      const taskText = task.title;
       newTask.querySelector(".taskText").textContent = taskText;
 
       const deleteBtn = newTask.querySelector(".deleteTask");
       deleteBtn.addEventListener("click", () => {
-        tasksContainer.removeChild(newTask); // Remove the task from the tasks container
+        tasksContainer.removeChild(newTask);
       });
 
       const taskTextElement = newTask.querySelector(".taskText");
